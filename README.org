@@ -38,14 +38,14 @@
   このスクリプトを使用してコンピューティングノードを設定した場合，
   ブリッジの構成は次のようになります．
   : # brctl show
-  : bridge name	bridge id		STP enabled	interfaces
-  : cloud0	8000.fe00a9fe0074	no		vnet0
-  : 							vnet3
-  : cloudbr0	8000.80ee733704b5	no		eth0
-  : 							vnet1
-  : 							vnet2
-  : 							vnet4
-  : 							vnet5
-  : 							vnet6
-  : virbr0	8000.52540079e395	yes		virbr0-nic
+  : bridge name bridge id               STP enabled     interfaces
+  : cloud0      8000.fe00a9fe0074       no              vnet0
+  :                                                     vnet3
+  : cloudbr0    8000.80ee733704b5       no              eth0
+  :                                                     vnet1
+  :                                                     vnet2
+  :                                                     vnet4
+  :                                                     vnet5
+  :                                                     vnet6
+  : virbr0      8000.52540079e395       yes             virbr0-nic
 
