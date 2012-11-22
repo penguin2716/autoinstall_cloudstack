@@ -51,3 +51,31 @@
   :                                                     vnet6
   : virbr0      8000.52540079e395       yes             virbr0-nic
 
+* 1台のサーバにCloudStackをインストールする際の簡易手順
+  - CentOS6.3のnetinstallディスクを使用してOSをインストールする
+  - CloudStackのインストールと設定
+  - yum install wget vim -y
+  - wget https://raw.github.com/penguin2716/autoinstall_cloudstack/master/autoinstall_cloudstack.sh
+  - vim ./autoinstall_cloudstack.sh # set your ssh public key
+  - chmod +x autoinstall_cloudstack.sh
+  - ./autoinstall_cloudstack.sh -canm
+    + インストールに必要な情報を入力します
+      | 項目名                | 説明                              | 参考するコマンドやファイル |
+      | hostname              | マシンのホスト名                  | hostname, /etc/hosts       |
+      | ip address            | マシンのIPアドレス                | ifconfig                   |
+      | netmask               | ネットマスク                      | ifconfig                   |
+      | gateway               | ゲートウェイ                      | route                      |
+      | dns1                  | DNS                               | /etc/resolv.conf           |
+      | dns2                  | DNS                               | /etc/resolv.conf           |
+      | network accept from   | アクセスを許可するVLANセグメント  | ifconfig                   |
+      | NFS Server IP         | NFSサーバのIPアドレス             | ifconfig                   |
+      | Primary mount point   | PrimaryStorageのマウントポイント  | /etc/exports               |
+      | Secondary mount point | SecondayStorageのマウントポイント | /etc/exports               |
+  - マシンが再起動したら，別のマシンのブラウザを開いてアクセス( http://YOUR-MANAGEMENT-SERVER-IP:8080/client )
+  - ユーザ名とパスワードを入力してログイン
+    + username: admin
+    + password: password
+  - 必要事項を入力する
+  - 構築が完了して，ダッシュボードに入ったら，SecondaryStorageVMを再起動する
+    + Infrastructure => System VMs => s-1-VM => Reboot System VM（回転する矢印のアイコン）
+  - Templates => CentOS 5.5 => ReadyがYesになるまで待つ
