@@ -1,6 +1,6 @@
 #!/bin/sh
 
-SSH_PUBLIC_KEY='ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDPI5qwXRPKmgUGK9hTnIjFVQ06lO52Jabe+4YiCqZCvHYgJFKdgyUTDgiWqXq5lMcfmOLdmxmS98HDX99tX+FWH/5RJZp5y5AuWg7zOksIEf0IwEKVg4rFCKuji2jbspq3I4nrV6EPWL3+33MQlgU0iXlut8zrfYubE+i2tqqKWp+ugQmZ3QbWi1EIB51F56WyIJegI7jkDyfWRkukXS8OqGKfCWqjFP/kkvtF03zeY1G6INe51E5X6ADmjEJ5DrXvTXIN2A97rA5BkcErJyxyXDATdPtho4VCTvVNAUN+qmyk78BhDawAID7WHUQgzqBfgQILErq2XvlHllwBIPhD penguin@ThinkPadX220'
+SSH_PUBLIC_KEY='insert_your_ssh_public_key_here'
 
 function add_ssh_public_key() {
     cd
