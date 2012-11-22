@@ -1,0 +1,51 @@
+* これは何？
+  CloudStack4.0のインストールを自動化するスクリプトです．
+  CentOS6.3をnetinstallした素の状態で実行することを想定しています．
+  CentOSのインストール後，このスクリプトに-canmオプションをつけてを1度だけ実行すれば，
+  自動的にCloudStackが構成されます．
+  その後はhttpでCloudStackのWebUIにアクセスできるようになります．
+
+  また，管理サーバやコンピューティングノードを分けて構築する場合でも，
+  オプションによってインストール・設定を行う項目を指定できるため，
+  インストール作業の大幅な効率化が見込めます．
+
+* 使い方
+  yumでwgetやopenssh-clients(scp)をインストールして，スクリプトをダウンロードします．
+  : ./autoinstall_cloudstack.sh -h
+  を実行すると，有効なオプションが出力されます．
+
+** 有効なオプション
+  | Option | Description               |
+  | -c     | install common packages   |
+  | -n     | install nfs server        |
+  | -a     | install cloud agent       |
+  | -m     | install management server |
+  | -h     | show this help            |
+  | -r     | reboot after installation |
+  管理サーバのみをインストールする場合は-cm，
+  NFSサーバのみをインストールする場合は-cn，
+  コンピューティングノードをインストールする場合は-ca，
+  というようにオプションを設定します．
+  -cオプションでは，SELinuxの設定など，どの環境でも共通の設定を行います．
+  : ./autoinstall_cloudstack.sh -cnamr
+  を実行すると，実行したマシン1台でCloudStackが稼働するように
+  インストール・設定が行われます．
+
+* 設計上の留意点
+  公式のインストールマニュアルがApacheCloudStackのサイトで公開されていますが
+  (http://incubator.apache.org/cloudstack/docs/en-US/Apache_CloudStack/4.0.0-incubating/html/Installation_Guide/index.html)，
+  このインストールマニュアルの構成とはブリッジの設定が異なっています．
+  このスクリプトを使用してコンピューティングノードを設定した場合，
+  ブリッジの構成は次のようになります．
+  : # brctl show
+  : bridge name	bridge id		STP enabled	interfaces
+  : cloud0	8000.fe00a9fe0074	no		vnet0
+  : 							vnet3
+  : cloudbr0	8000.80ee733704b5	no		eth0
+  : 							vnet1
+  : 							vnet2
+  : 							vnet4
+  : 							vnet5
+  : 							vnet6
+  : virbr0	8000.52540079e395	yes		virbr0-nic
+
