@@ -17,13 +17,13 @@
   を実行すると，有効なオプションが出力されます．
 
 ** 有効なオプション
-  | Option | Description               |
-  | -c     | install common packages   |
-  | -n     | install nfs server        |
-  | -a     | install cloud agent       |
-  | -m     | install management server |
-  | -h     | show this help            |
-  | -r     | reboot after installation |
+  | オプション | 説明                                   |
+  | -c         | 共通パッケージのインストール           |
+  | -n         | NFSサーバのインストール                |
+  | -a         | コンピューティングノードのインストール |
+  | -m         | 管理サーバのインストール               |
+  | -h         | ヘルプの表示                           |
+  | -r         | インストール終了後に再起動する         |
   管理サーバのみをインストールする場合は'-cm'，
   NFSサーバのみをインストールする場合は'-cn'，
   コンピューティングノードをインストールする場合は'-ca'，
