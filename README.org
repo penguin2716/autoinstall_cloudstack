@@ -35,7 +35,7 @@
 
 * 設計上の留意点
   公式のインストールマニュアルがApacheCloudStackのサイトで公開されていますが
-  (http://incubator.apache.org/cloudstack/docs/en-US/Apache_CloudStack/4.0.0-incubating/html/Installation_Guide/index.html)，
+  ( http://incubator.apache.org/cloudstack/docs/en-US/Apache_CloudStack/4.0.0-incubating/html/Installation_Guide/index.html )，
   このインストールマニュアルの構成とはブリッジの設定が異なっています．
   このスクリプトを使用してコンピューティングノードを設定した場合，
   ブリッジの構成は次のようになります．
