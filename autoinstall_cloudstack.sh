@@ -251,6 +251,9 @@ then
 fi
 if [ "$opt_reboot" = "true" ]
 then
+    sync
+    sync
+    sync
     reboot
 fi
 
