@@ -147,6 +147,8 @@ TYPE=Bridge" > /etc/sysconfig/network-scripts/ifcfg-cloudbr0
 
 function install_nfs() {
     yum install nfs-utils -y
+    service rpcbind start
+    chkconfig rpcbind on
     service nfs start
     chkconfig nfs on
 
