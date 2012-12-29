@@ -101,10 +101,13 @@ function initialize_storage() {
     mkdir -p /mnt/primary
     mkdir -p /mnt/secondary
     mount -t nfs ${NFS_SERVER_IP}:${NFS_SERVER_PRIMARY} /mnt/primary
+    sleep 10
     mount -t nfs ${NFS_SERVER_IP}:${NFS_SERVER_SECONDARY} /mnt/secondary
+    sleep 10
     rm -rf /mnt/primary/*
     rm -rf /mnt/secondary/*
     /usr/lib64/cloud/common/scripts/storage/secondary/cloud-install-sys-tmplt -m /mnt/secondary -u http://download.cloud.com/templates/acton/acton-systemvm-02062012.qcow2.bz2 -h kvm -F
+    sync
     umount /mnt/primary
     umount /mnt/secondary
     rmdir /mnt/primary
