@@ -116,11 +116,11 @@ function initialize_storage() {
    
 function install_agent() {
     yum install cloud-agent bridge-utils -y
-    echo 'listen_tls = 0
+    echo "listen_tls = 0
 listen_tcp = 1
-tcp_port = "16509"
-auth_tcp = "none"
-mdns_adv = 0' >> /etc/libvirt/libvirtd.conf
+tcp_port = \"16509\"
+auth_tcp = \"none\"
+mdns_adv = 0" >> /etc/libvirt/libvirtd.conf
     sed -i -e 's/#LIBVIRTD_ARGS="--listen"/LIBVIRTD_ARGS="--listen"/g' /etc/sysconfig/libvirtd
     service libvirtd restart
 
