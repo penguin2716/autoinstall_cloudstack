@@ -116,6 +116,12 @@ function initialize_storage() {
    
 function install_agent() {
     yum install cloud-agent bridge-utils -y
+    echo "group virt {
+        cpu {
+            cpu.shares=9216;
+        }
+}" >> /etc/cgconfig.conf
+    service cgconfig restart
     echo "listen_tls = 0
 listen_tcp = 1
 tcp_port = \"16509\"
