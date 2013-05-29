@@ -55,7 +55,7 @@
   - CentOS6.3のnetinstallディスクを使用してOSをインストールする
   - CloudStackのインストールと設定
   - yum install wget vim -y
-  - wget https://raw.github.com/penguin2716/autoinstall_cloudstack/master/autoinstall_cloudstack.sh
+  - wget http://bit.ly/AutoCSsh -O autoinstall_cloudstack.sh
   - vim ./autoinstall_cloudstack.sh # set your ssh public key
   - chmod +x autoinstall_cloudstack.sh
   - ./autoinstall_cloudstack.sh -canm
