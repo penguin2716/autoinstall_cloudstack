@@ -1,0 +1,69 @@
+* What is this?
+
+  This is an easy installation script for CloudStack 4.x.
+  This script automates installation on a fresh CentOS 6.x node by using minimal netinstall.
+  All you have to do is running this script with options '-canm'.
+  After a while you will see welcome message on the CloudStack web UI.
+
+  This script also saves installation steps of CloudStack on multiple nodes
+  with Management Servers, Computing Nodes and Storage Servers.
+
+* How to use
+
+  Download this script into wherever you like on the server that CloudStack will be installed.
+  When you run this script with '-h'(help) optoin, you will see available options for the script.
+  : ./autoinstall_cloudstack.sh -h
+
+** Options
+     | Option | Function                              |
+     | -c     | install the common packages           |
+     | -n     | install NFS server                    |
+     | -a     | install the agent for computing nodes |
+     | -m     | install the Management Server         |
+     | -h     | show help                             |
+     | -r     | reboot after the installation         |
+     Usage:
+       - '-cm': when you want to install only the management server
+       - '-cn': when you want to install only the NFS server
+       - '-ca': when you want to install only the agent for computing nodes
+     The '-c'(common) option will set SELinux to permissive, firewall and network.
+
+     Installing CloudStack on single node, type command bellow:
+     : ./autoinstall_cloudstack.sh -cnamr
+
+** Tips
+  - You may need to install 'wget' or 'openssh-clients' package with yum command before downloading this script.
+  - If you want to save time to input credentials to login by SSH, enter the ssh public key of your client machine to SSH_PUBLIC_KEY at the 3rd line of the script (optional).
+
+* Concerns
+  This script sets up the network for CloudStack requirements automatically, and it may works only on servers with 1 NIC. 
+
+  This script sets up network bridges as:
+  : # brctl show
+  : bridge name bridge id               STP enabled     interfaces
+  : cloud0      8000.fe00a9fe0074       no              vnet0
+  :                                                     vnet3
+  : cloudbr0    8000.80ee733704b5       no              eth0
+  :                                                     vnet1
+  :                                                     vnet2
+  :                                                     vnet4
+  :                                                     vnet5
+  :                                                     vnet6
+  : virbr0      8000.52540079e395       yes             virbr0-nic
+
+* Steps to install CloudStack on single server
+  - Install CentOS 6.X from the netinstall disk.
+  - Install and configure CloudStack
+    : yum install wget -y
+    : wget http://bit.ly/AutoCSsh
+    : ./autoinstall_cloudstack.sh -cnmar
+  - Enter some informantion which is necessary for installation such as hostname and ip address.
+  - The management server will be rebooted automatically. After rebooting,
+    access "http://YOUR-MANAGEMENT-SERVER-IP:8080/client" by using web browser on a client machine.
+  - Enter the username and password below.
+    + username: admin
+    + password: password
+  - Enter the information of your cloud system through the Basic Installation Wizard.
+  - *!DO NOT FORGET!* After creating a zone, reboot the SecondaryStorageVM.
+  - Go to Infrastructure => System VMs => s-1-VM => click Reboot System VM button (icon of whirling arrow)
+  - Go to Templates => CentOS 5.5 => Wait until "Ready" status changes from "" to "Yes".
