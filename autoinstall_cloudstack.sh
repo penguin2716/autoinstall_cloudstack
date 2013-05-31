@@ -161,9 +161,10 @@ function install_nfs() {
     service nfs start
     chkconfig nfs on
 
-    mkdir -p /export/primary
-    mkdir -p /export/secondary
-    echo '/export	*(rw,async,no_root_squash)' > /etc/exports
+    mkdir -p $NFS_SERVER_PRIMARY
+    mkdir -p $NFS_SERVER_SECONDARY
+    echo "$NFS_SERVER_PRIMARY	*(rw,async,no_root_squash)" >  /etc/exports
+    echo "$NFS_SERVER_SECONDARY	*(rw,async,no_root_squash)" >> /etc/exports
     exportfs -a
 
     echo "LOCKD_TCPPORT=32803
