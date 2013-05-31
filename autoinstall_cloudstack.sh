@@ -11,25 +11,25 @@ function add_ssh_public_key() {
 }
 
 function get_network_info() {
-    echo '* for cloud agent'
-    read -p ' hostname: ' HOSTNAME
-    read -p ' ip address: ' IPADDR
-    read -p ' netmask: ' NETMASK
-    read -p ' gateway: ' GATEWAY
-    read -p ' dns1: ' DNS1
-    read -p ' dns2: ' DNS2
+    echo '* settings for cloud agent'
+	read -p ' hostname   (ex:cloudstack)   : ' HOSTNAME
+	read -p ' ip address (ex:192.168.1.2)  : ' IPADDR
+	read -p ' netmask    (ex:255.255.255.0): ' NETMASK
+	read -p ' gateway    (ex:192.168.1.1)  : ' GATEWAY
+	read -p ' dns1       (ex:192.168.1.1)  : ' DNS1
+	read -p ' dns2       (ex:8.8.4.4)      : ' DNS2
 }
 
 function get_nfs_info() {
-    echo '* for nfs server'
+    echo '* settings for nfs server'
     read -p ' NFS Server IP: ' NFS_SERVER_IP
-    read -p ' Primary mount point (ex:/export/primary): ' NFS_SERVER_PRIMARY
+    read -p ' Primary mount point   (ex:/export/primary)  : ' NFS_SERVER_PRIMARY
     read -p ' Secondary mount point (ex:/export/secondary): ' NFS_SERVER_SECONDARY
 }
 
 function get_nfs_network() {
-    echo '* for iptables'
-    read -p ' network accept from (ex:192.168.1.0/24): ' NETWORK
+    echo '* settings for nfs server'
+    read -p ' accept access from (ex:192.168.1.0/24): ' NETWORK
 }
 
 function install_common() {
