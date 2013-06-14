@@ -56,7 +56,7 @@
   - Install and configure CloudStack
     : yum install wget -y
     : wget http://bit.ly/AutoCSsh
-    : ./autoinstall_cloudstack.sh -cnmar
+    : sh ./autoinstall_cloudstack.sh -cnmar
   - Enter some informantion which is necessary for installation such as hostname and ip address.
   - The management server will be rebooted automatically. After rebooting,
     access "http://YOUR-MANAGEMENT-SERVER-IP:8080/client" by using web browser on a client machine.
