@@ -91,6 +91,7 @@ interact
     cloud-setup-databases cloud:password@localhost --deploy-as=root:password
     cloud-setup-management
     chkconfig cloud-management on
+    chown cloud:cloud /var/log/cloud/management/catalina.out
 }
 
 function initialize_storage() {
