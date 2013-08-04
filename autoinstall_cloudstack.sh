@@ -12,12 +12,12 @@ function add_ssh_public_key() {
 
 function get_network_info() {
     echo '* settings for cloud agent'
-	read -p ' hostname   (ex:cloudstack)   : ' HOSTNAME
-	read -p ' ip address (ex:192.168.1.2)  : ' IPADDR
-	read -p ' netmask    (ex:255.255.255.0): ' NETMASK
-	read -p ' gateway    (ex:192.168.1.1)  : ' GATEWAY
-	read -p ' dns1       (ex:192.168.1.1)  : ' DNS1
-	read -p ' dns2       (ex:8.8.4.4)      : ' DNS2
+    read -p ' hostname   (ex:cloudstack)   : ' HOSTNAME
+    read -p ' ip address (ex:192.168.1.2)  : ' IPADDR
+    read -p ' netmask    (ex:255.255.255.0): ' NETMASK
+    read -p ' gateway    (ex:192.168.1.1)  : ' GATEWAY
+    read -p ' dns1       (ex:192.168.1.1)  : ' DNS1
+    read -p ' dns2       (ex:8.8.4.4)      : ' DNS2
 }
 
 function get_nfs_info() {
@@ -38,7 +38,7 @@ function install_common() {
     setenforce permissive
     echo "[cloudstack]
 name=cloudstack
-baseurl=http://cloudstack.apt-get.eu/rhel/4.0/
+baseurl=http://cloudstack.apt-get.eu/rhel/4.1/
 enabled=1
 gpgcheck=0" > /etc/yum.repos.d/CloudStack.repo
     sed -i -e "s/localhost/$HOSTNAME localhost/" /etc/hosts
@@ -46,8 +46,8 @@ gpgcheck=0" > /etc/yum.repos.d/CloudStack.repo
     service ntpd start
     chkconfig ntpd on
     wget http://download.cloud.com.s3.amazonaws.com/tools/vhd-util
-    mkdir -p /usr/lib64/cloud/common/scripts/vm/hypervisor/xenserver
-    mv vhd-util /usr/lib64/cloud/common/scripts/vm/hypervisor/xenserver
+    mkdir -p /usr/share/cloudstack-common/common/scripts/vm/hypervisor/xenserver
+    mv vhd-util /usr/share/cloudstack-common/common/scripts/vm/hypervisor/xenserver
 }
 
 function install_management() {
@@ -88,10 +88,10 @@ expect \"Reload privilege tables now?\"
 send \"Y\n\"
 interact
 "
-    cloud-setup-databases cloud:password@localhost --deploy-as=root:password
-    cloud-setup-management
+    cloudstack-setup-databases cloud:password@localhost --deploy-as=root:password
+    cloudstack-setup-management
     chkconfig cloud-management on
-    chown cloud:cloud /var/log/cloud/management/catalina.out
+    chown cloud:cloud /var/log/cloudstack/management/catalina.out
 }
 
 function initialize_storage() {
@@ -107,14 +107,14 @@ function initialize_storage() {
     sleep 10
     rm -rf /mnt/primary/*
     rm -rf /mnt/secondary/*
-    /usr/lib64/cloud/common/scripts/storage/secondary/cloud-install-sys-tmplt -m /mnt/secondary -u http://download.cloud.com/templates/acton/acton-systemvm-02062012.qcow2.bz2 -h kvm -F
+    /usr/share/cloudstack-common/scripts/storage/secondary/cloud-install-sys-tmplt -m /mnt/secondary -u http://download.cloud.com/templates/acton/acton-systemvm-02062012.qcow2.bz2 -h kvm -F
     sync
     umount /mnt/primary
     umount /mnt/secondary
     rmdir /mnt/primary
     rmdir /mnt/secondary
 }
-   
+
 function install_agent() {
     yum install cloud-agent bridge-utils -y
     echo "group virt {
@@ -164,8 +164,8 @@ function install_nfs() {
 
     mkdir -p $NFS_SERVER_PRIMARY
     mkdir -p $NFS_SERVER_SECONDARY
-    echo "$NFS_SERVER_PRIMARY	*(rw,async,no_root_squash)" >  /etc/exports
-    echo "$NFS_SERVER_SECONDARY	*(rw,async,no_root_squash)" >> /etc/exports
+    echo "$NFS_SERVER_PRIMARY   *(rw,async,no_root_squash)" >  /etc/exports
+    echo "$NFS_SERVER_SECONDARY *(rw,async,no_root_squash)" >> /etc/exports
     exportfs -a
 
     echo "LOCKD_TCPPORT=32803
@@ -206,13 +206,13 @@ fi
 
 while getopts "acnmhr" flag; do
     case $flag in
-	\?) OPT_ERROR=1; break;;
-	h) OPT_ERROR=1; break;;
-	a) opt_agent=true;;
-	c) opt_common=true;;
-	n) opt_nfs=true;;
-	m) opt_management=true;;
-	r) opt_reboot=true;;
+    \?) OPT_ERROR=1; break;;
+    h) OPT_ERROR=1; break;;
+    a) opt_agent=true;;
+    c) opt_common=true;;
+    n) opt_nfs=true;;
+    m) opt_management=true;;
+    r) opt_reboot=true;;
     esac
 done
 
@@ -269,4 +269,3 @@ then
     sync
     reboot
 fi
-
