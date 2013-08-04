@@ -46,8 +46,8 @@ gpgcheck=0" > /etc/yum.repos.d/CloudStack.repo
     service ntpd start
     chkconfig ntpd on
     wget http://download.cloud.com.s3.amazonaws.com/tools/vhd-util
-    mkdir -p /usr/lib64/cloud/common/scripts/vm/hypervisor/xenserver
-    mv vhd-util /usr/lib64/cloud/common/scripts/vm/hypervisor/xenserver
+    mkdir -p /usr/share/cloudstack-common/common/scripts/vm/hypervisor/xenserver
+    mv vhd-util /usr/share/cloudstack-common/common/scripts/vm/hypervisor/xenserver
 }
 
 function install_management() {
