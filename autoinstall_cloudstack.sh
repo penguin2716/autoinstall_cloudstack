@@ -90,7 +90,7 @@ interact
 "
     cloudstack-setup-databases cloud:password@localhost --deploy-as=root:password
     cloudstack-setup-management
-    chkconfig cloud-management on
+    chkconfig cloudstack-management on
     chown cloud:cloud /var/log/cloudstack/management/catalina.out
 }
 
