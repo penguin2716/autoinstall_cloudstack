@@ -51,7 +51,7 @@ gpgcheck=0" > /etc/yum.repos.d/CloudStack.repo
 }
 
 function install_management() {
-    yum install cloud-client mysql-server expect -y
+    yum install cloudstack-management mysql-server expect -y
 
     head -7 /etc/my.cnf > /tmp/before
     tail -n +7 /etc/my.cnf > /tmp/after
