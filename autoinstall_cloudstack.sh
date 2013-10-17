@@ -116,7 +116,7 @@ function initialize_storage() {
 }
 
 function install_agent() {
-    yum install cloud-agent bridge-utils -y
+    yum install cloud-agent bridge-utils vconfig -y
     echo "group virt {
         cpu {
             cpu.shares=9216;
