@@ -38,7 +38,7 @@ function install_common() {
     setenforce permissive
     echo "[cloudstack]
 name=cloudstack
-baseurl=http://cloudstack.apt-get.eu/rhel/4.1/
+baseurl=http://cloudstack.apt-get.eu/rhel/4.2/
 enabled=1
 gpgcheck=0" > /etc/yum.repos.d/CloudStack.repo
     sed -i -e "s/localhost/$HOSTNAME localhost/" /etc/hosts
@@ -89,6 +89,7 @@ send \"Y\n\"
 interact
 "
     cloudstack-setup-databases cloud:password@localhost --deploy-as=root:password
+    echo "Defaults:cloud !requiretty" >> /etc/sudoers
     cloudstack-setup-management
     chkconfig cloudstack-management on
     chown cloud:cloud /var/log/cloudstack/management/catalina.out
@@ -107,7 +108,7 @@ function initialize_storage() {
     sleep 10
     rm -rf /mnt/primary/*
     rm -rf /mnt/secondary/*
-    /usr/share/cloudstack-common/scripts/storage/secondary/cloud-install-sys-tmplt -m /mnt/secondary -u http://download.cloud.com/templates/acton/acton-systemvm-02062012.qcow2.bz2 -h kvm -F
+    /usr/share/cloudstack-common/scripts/storage/secondary/cloud-install-sys-tmplt -m /mnt/secondary -u http://download.cloud.com/templates/4.2/systemvmtemplate-2013-06-12-master-kvm.qcow2.bz2
     sync
     umount /mnt/primary
     umount /mnt/secondary
