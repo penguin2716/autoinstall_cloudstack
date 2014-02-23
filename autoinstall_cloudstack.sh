@@ -117,7 +117,8 @@ function initialize_storage() {
 }
 
 function install_agent() {
-    yum install cloud-agent bridge-utils vconfig -y
+    yum install qemu-kvm cloud-agent bridge-utils vconfig -y
+    modprobe kvm-intel
     echo "group virt {
         cpu {
             cpu.shares=9216;
